@@ -309,45 +309,163 @@
       margin-bottom: 1.25rem;
     }
 
-    /* ── Process ── */
+    /* ── Process / Timeline ── */
     .process-section { background: var(--warm); }
 
-    .process-grid {
+    :root {
+      --color-inicial: #0d9488;
+      --color-crecimiento: #f59e0b;
+      --color-escala: #6366f1;
+    }
+
+    .timeline-wrapper {
+      position: relative;
+      padding: 2rem 0 1rem;
+    }
+
+    .timeline-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      margin-bottom: 2rem;
     }
 
-    .process-step {
-      text-align: center;
+    .tl-card { text-align: center; padding: 0 1rem; }
+
+    .tl-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
     }
 
-    .step-number {
-      width: 48px;
-      height: 48px;
-      background: var(--teal);
-      color: var(--white);
+    .tl-card .tl-package-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    .tl-card p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .tl-card:nth-child(1) h4 { color: var(--color-inicial); }
+    .tl-card:nth-child(1) .tl-package-name { color: var(--color-inicial); }
+    .tl-card:nth-child(2) h4 { color: var(--color-crecimiento); }
+    .tl-card:nth-child(2) .tl-package-name { color: var(--color-crecimiento); }
+    .tl-card:nth-child(3) h4 { color: var(--color-escala); }
+    .tl-card:nth-child(3) .tl-package-name { color: var(--color-escala); }
+
+    .timeline-bar {
+      position: relative;
+      display: flex;
+      height: 6px;
+      border-radius: 3px;
+      overflow: visible;
+      margin-bottom: 0.25rem;
+    }
+
+    .tl-segment {
+      position: relative;
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    .tl-segment:first-child { border-radius: 3px 0 0 3px; }
+    .tl-segment:last-child { border-radius: 0 3px 3px 0; }
+
+    .tl-seg-inicial  { background: var(--color-inicial);  flex: 4; }
+    .tl-seg-crec     { background: var(--color-crecimiento); flex: 4; }
+    .tl-seg-escala   { background: var(--color-escala);   flex: 4; }
+
+    .tl-node {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      display: inline-flex;
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
+      z-index: 2;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    .process-step h3 {
-      font-size: 1.1rem;
+    .tl-node-start { left: 0; }
+    .tl-node-end   { left: 100%; }
+
+    .tl-node-inicial  { background: var(--color-inicial); }
+    .tl-node-crec     { background: var(--color-crecimiento); }
+    .tl-node-escala   { background: var(--color-escala); }
+
+    .timeline-weeks {
+      display: flex;
+      position: relative;
+      height: 1.5rem;
+    }
+
+    .tl-week-segment {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tl-week-segment:nth-child(1) { flex: 4; }
+    .tl-week-segment:nth-child(2) { flex: 4; }
+    .tl-week-segment:nth-child(3) { flex: 4; }
+
+    .tl-week {
+      font-size: 0.75rem;
       font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 0.5rem;
+      color: var(--text-light);
+      transform: translateX(-50%);
     }
 
-    .process-step p {
-      font-size: 0.9rem;
-      color: var(--text-light);
-      max-width: 300px;
-      margin: 0 auto;
+    .tl-week:last-child {
+      transform: translateX(50%);
+    }
+
+    .timeline-legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .tl-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .tl-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .tl-card { padding: 0; }
+
+      .timeline-bar { height: 8px; }
     }
 
     /* ── About / Trust ── */
@@ -684,23 +802,60 @@
   <section class="process-section">
     <div class="section-inner">
       <p class="section-label">C&oacute;mo Funciona</p>
-      <h2 class="section-title">Tres pasos. Sin complicaciones.</h2>
-      <p class="section-subtitle">Mantenemos los proyectos enfocados y pr&aacute;cticos para que vea resultados r&aacute;pido.</p>
-      <div class="process-grid">
-        <div class="process-step">
-          <div class="step-number">1</div>
-          <h3>Diagnosticar</h3>
-          <p>Identificamos su mayor cuello de botella operativo y mapeamos sus herramientas y datos actuales.</p>
+      <h2 class="section-title">Cronograma t&iacute;pico de implementaci&oacute;n</h2>
+      <p class="section-subtitle">Empiece en peque&ntilde;o y crezca a su ritmo. Cada paquete tiene un alcance claro y un tiempo estimado de entrega.</p>
+
+      <div class="timeline-wrapper">
+        <div class="timeline-cards">
+          <div class="tl-card">
+            <p class="tl-package-name">Inicial</p>
+            <h4>Visibilidad de Datos</h4>
+            <p>Dashboards, datos limpios y reportes autom&aacute;ticos en 2&ndash;4 semanas.</p>
+          </div>
+          <div class="tl-card">
+            <p class="tl-package-name">Crecimiento</p>
+            <h4>Automatizaci&oacute;n + IA</h4>
+            <p>Flujos automatizados y asistentes de IA eliminan tareas repetitivas en 4&ndash;8 semanas.</p>
+          </div>
+          <div class="tl-card">
+            <p class="tl-package-name">Escala</p>
+            <h4>Infraestructura + Orquestaci&oacute;n</h4>
+            <p>Nube, pipelines y soporte continuo para su pr&oacute;xima etapa en 6&ndash;12 semanas.</p>
+          </div>
         </div>
-        <div class="process-step">
-          <div class="step-number">2</div>
-          <h3>Implementar</h3>
-          <p>Construimos y desplegamos una soluci&oacute;n a la medida, no un proyecto empresarial sobredimensionado.</p>
+
+        <div class="timeline-bar">
+          <div class="tl-segment tl-seg-inicial">
+            <span class="tl-node tl-node-inicial tl-node-start">01</span>
+            <span class="tl-node tl-node-inicial tl-node-end">02</span>
+          </div>
+          <div class="tl-segment tl-seg-crec">
+            <span class="tl-node tl-node-crec tl-node-end">03</span>
+          </div>
+          <div class="tl-segment tl-seg-escala">
+            <span class="tl-node tl-node-escala tl-node-end">04</span>
+          </div>
         </div>
-        <div class="process-step">
-          <div class="step-number">3</div>
-          <h3>Acompa&ntilde;ar</h3>
-          <p>Damos soporte y mejoramos el sistema conforme su negocio crece y surgen nuevas necesidades.</p>
+
+        <div class="timeline-weeks">
+          <div class="tl-week-segment">
+            <span class="tl-week">Sem 0</span>
+            <span class="tl-week">Sem 4</span>
+          </div>
+          <div class="tl-week-segment">
+            <span class="tl-week" style="visibility:hidden">.</span>
+            <span class="tl-week">Sem 8</span>
+          </div>
+          <div class="tl-week-segment">
+            <span class="tl-week" style="visibility:hidden">.</span>
+            <span class="tl-week">Sem 12</span>
+          </div>
+        </div>
+
+        <div class="timeline-legend">
+          <span class="tl-legend-item"><span class="tl-legend-dot" style="background:var(--color-inicial)"></span> Inicial: 2&ndash;4 sem</span>
+          <span class="tl-legend-item"><span class="tl-legend-dot" style="background:var(--color-crecimiento)"></span> Crecimiento: 4&ndash;8 sem</span>
+          <span class="tl-legend-item"><span class="tl-legend-dot" style="background:var(--color-escala)"></span> Escala: 6&ndash;12 sem</span>
         </div>
       </div>
     </div>
@@ -726,6 +881,7 @@
           <h3 style="font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:0.75rem;">Herramientas y plataformas que usamos</h3>
           <div class="tools-list">
             <span class="tool-tag">Python</span>
+            <span class="tool-tag">Databricks</span>
             <span class="tool-tag">Power BI</span>
             <span class="tool-tag">Looker Studio</span>
             <span class="tool-tag">Google Cloud</span>
@@ -753,16 +909,16 @@
           <div class="contact-options">
             <div class="contact-option">
               <span class="icon">&#128231;</span>
-              <span>hello@costaricaaipartner.com</span>
+              <span>kevinromerooviedo@gmail.com</span>
             </div>
             <div class="contact-option">
               <span class="icon">&#128172;</span>
-              <span>WhatsApp: +506 0000-0000</span>
+              <span>WhatsApp: +506 8636 0747</span>
             </div>
           </div>
         </div>
         <form class="contact-form" action="https://formspree.io/f/mojyqdya" method="POST">
-          <input type="hidden" name="_replyto" value="hello@costaricaaipartner.com">
+          <input type="hidden" name="_replyto" value="kevinromerooviedo@gmail.com">
           <input type="hidden" name="_subject" value="Nueva consulta - Costa Rica AI Partner">
           <h3>Agende una Llamada de Descubrimiento Gratuita</h3>
           <div class="form-group">
