@@ -761,19 +761,21 @@
             </div>
           </div>
         </div>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('&iexcl;Gracias! Nos pondremos en contacto pronto.');">
+        <form class="contact-form" action="https://formspree.io/f/mojyqdya" method="POST">
+          <input type="hidden" name="_replyto" value="hello@costaricaaipartner.com">
+          <input type="hidden" name="_subject" value="Nueva consulta - Costa Rica AI Partner">
           <h3>Agende una Llamada de Descubrimiento Gratuita</h3>
           <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" id="name" placeholder="Su nombre" required>
+            <input type="text" id="name" name="name" placeholder="Su nombre" required>
           </div>
           <div class="form-group">
             <label for="email">Correo electr&oacute;nico</label>
-            <input type="email" id="email" placeholder="usted@empresa.com" required>
+            <input type="email" id="email" name="email" placeholder="usted@empresa.com" required>
           </div>
           <div class="form-group">
             <label for="interest">Interesado en</label>
-            <select id="interest">
+            <select id="interest" name="interest">
               <option value="">Seleccione un paquete...</option>
               <option>Inicial: Visibilidad de Datos</option>
               <option>Crecimiento: Automatizaci&oacute;n + IA</option>
@@ -783,7 +785,7 @@
           </div>
           <div class="form-group">
             <label for="message">Cu&eacute;ntenos sobre su negocio</label>
-            <textarea id="message" placeholder="&iquest;Cu&aacute;l es su mayor desaf&iacute;o operativo en este momento?"></textarea>
+            <textarea id="message" name="message" placeholder="&iquest;Cu&aacute;l es su mayor desaf&iacute;o operativo en este momento?"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Agendar Mi Llamada Gratuita</button>
         </form>
